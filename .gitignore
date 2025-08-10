@@ -40,3 +40,4 @@ Thumbs.db
 # Build directory or other output folders
 bin/
 _build/
+tmp/
