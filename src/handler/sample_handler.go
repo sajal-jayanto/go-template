@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"github.com/gofiber/fiber/v2"
@@ -7,10 +7,10 @@ import (
 )
 
 // singleton instance
-type sampleCtrl struct{}
-var SampleCtrl sampleCtrl
+type sampleHandler struct{}
+var SampleHandler sampleHandler
 
-func (sampleCtrl) CreateSample(ctx *fiber.Ctx) error {
+func (sampleHandler) CreateSample(ctx *fiber.Ctx) error {
 	var sample models.Sample
 	if err := ctx.BodyParser(&sample); err != nil {
 		return ctx.Status(400).JSON(fiber.Map{"error": "invalid request body"})
@@ -24,7 +24,7 @@ func (sampleCtrl) CreateSample(ctx *fiber.Ctx) error {
 	return ctx.Status(201).JSON(data)
 }
 
-func (sampleCtrl) GetAllSample(ctx *fiber.Ctx) error {
+func (sampleHandler) GetAllSample(ctx *fiber.Ctx) error {
 	data, err := repository.SampleRepo.GetAll()
 	if err != nil{
 		return ctx.Status(400).JSON(fiber.Map{"error": err.Error()})

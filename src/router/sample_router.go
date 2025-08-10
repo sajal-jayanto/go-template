@@ -1,14 +1,14 @@
-package route
+package router
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/sajal-jayanto/go-template/src/controller"
+	"github.com/sajal-jayanto/go-template/src/handler"
 )
 
 func SetupSampleRoutes(version *fiber.App){
   route := version.Group("/sample")
 
-  route.Post("/", controller.SampleCtrl.CreateSample)
-  route.Get("/",  controller.SampleCtrl.GetAllSample)
+  route.Post("/", handler.SampleHandler.CreateSample)
+  route.Get("/",  handler.SampleHandler.GetAllSample)
 
 }

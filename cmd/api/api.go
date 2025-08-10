@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/sajal-jayanto/go-template/src/route"
+	"github.com/sajal-jayanto/go-template/src/router"
 )
 
 type APIServer struct {
@@ -23,9 +23,11 @@ func (server *APIServer) Run() error {
 	v1 := fiber.New()
 	app.Mount("/api/v1", v1)
 
-	// Set up all the routers 
-	route.SetupSampleRoutes(v1)
+	// Set up sample routers 
+	router.SetupSampleRoutes(v1)
 	
+
+
 	// v2 := fiber.New()
 	// app.Mount("/api/v2", v2)
 
