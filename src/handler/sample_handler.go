@@ -88,7 +88,7 @@ func (sampleHandler) UpdateSampleById(ctx *fiber.Ctx) error {
 		)
 	}
 
-	data, err := repository.SampleRepo.UpdateSampleById(id , sample.Data)
+	data, err := repository.SampleRepo.UpdateSampleById(id, sample.Data)
 	if err != nil{
 		return ctx.Status(fiber.StatusInternalServerError).JSON(
 			fiber.Map{"error": err.Error()},

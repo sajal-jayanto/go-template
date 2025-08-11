@@ -44,7 +44,6 @@ func (sampleRepo) RemoveById(id int) error {
   return nil
 }
 
-
 func (sampleRepo) UpdateSampleById(id int, newData string) (models.Sample, error) {
 	var sample models.Sample
 	result := db.Connection.Model(&models.Sample{}).Where("id = ?", id).Update("data" , newData)
