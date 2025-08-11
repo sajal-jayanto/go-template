@@ -8,7 +8,7 @@ import (
 func SetupSampleRoutes(version *fiber.App){
   route := version.Group("/sample")
 
-  route.Post("/", handler.SampleHandler.CreateSample)
-  route.Get("/",  handler.SampleHandler.GetAllSample)
-
+  route.Post("/",   handler.SampleHandler.CreateSample)
+  route.Get("/",    handler.SampleHandler.GetAllSample)
+  route.Get("/:id", handler.SampleHandler.GetSampleById)
 }
