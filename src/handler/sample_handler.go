@@ -41,12 +41,12 @@ func (sampleHandler) CreateSample(ctx *fiber.Ctx) error {
 func (sampleHandler) GetAllSample(ctx *fiber.Ctx) error {
 	data, err := repository.SampleRepo.GetAll()
 	if err != nil{
-		return ctx.Status(400).JSON(
+		return ctx.Status(fiber.StatusBadRequest).JSON(
 			fiber.Map{"error": err.Error()},
 		)
 	}
 	
-	return ctx.Status(200).JSON(data)
+	return ctx.Status(fiber.StatusOK).JSON(data)
 }
 
 func(sampleHandler) GetSampleById(ctx *fiber.Ctx) error {
@@ -64,5 +64,5 @@ func(sampleHandler) GetSampleById(ctx *fiber.Ctx) error {
 		)
 	}
 	
-	return ctx.Status(200).JSON(data)
+	return ctx.Status(fiber.StatusOK).JSON(data)
 }
