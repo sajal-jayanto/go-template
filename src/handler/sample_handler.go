@@ -66,3 +66,54 @@ func(sampleHandler) GetSampleById(ctx *fiber.Ctx) error {
 	
 	return ctx.Status(fiber.StatusOK).JSON(data)
 }
+
+func (sampleHandler) UpdateSampleById(ctx *fiber.Ctx) error {
+	id, err := utils.GetParamInt(ctx, "id")
+	if err != nil {
+		return ctx.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{"error": err.Error()},
+		)
+	}
+
+	var sample models.Sample
+	if err := ctx.BodyParser(&sample); err != nil {
+		return ctx.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{"error": "invalid body request"},
+		)
+	}
+
+	if err := validate.Struct(sample); err != nil {
+		return ctx.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{"error": utils.FormatValidationErrors(err)},
+		)
+	}
+
+	data, err := repository.SampleRepo.UpdateSampleById(id , sample.Data)
+	if err != nil{
+		return ctx.Status(fiber.StatusInternalServerError).JSON(
+			fiber.Map{"error": err.Error()},
+		)
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(data)
+}
+
+func(sampleHandler) RemoveSampleById(ctx *fiber.Ctx) error {
+	id, err := utils.GetParamInt(ctx, "id")
+	if err != nil {
+		return ctx.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{"error": err.Error()},
+		)
+	}
+
+	err = repository.SampleRepo.RemoveById(id)
+	if err != nil{
+		return ctx.Status(fiber.StatusInternalServerError).JSON(
+			fiber.Map{"error": err.Error()},
+		)
+	}
+	
+	return ctx.Status(fiber.StatusOK).JSON(
+		fiber.Map{"success": true},
+	)
+}
