@@ -30,6 +30,7 @@ func (sampleRepo) GetById(id int) (models.Sample, error){
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
     return sample, errors.New("sample not found")
   }
+
 	return sample, result.Error
 }
 
@@ -41,6 +42,7 @@ func (sampleRepo) RemoveById(id int) error {
 	if result.RowsAffected == 0 {
 		return errors.New("sample with id " + strconv.Itoa(id)  + " not found")
 	}
+	
   return nil
 }
 

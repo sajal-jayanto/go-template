@@ -1,8 +1,6 @@
-# Go HTTP Template
+# Go Template
 
 This project is a Go HTTP server with PostgreSQL and database migrations.
-
----
 
 ## Setup
 
