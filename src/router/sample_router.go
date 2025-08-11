@@ -5,7 +5,10 @@ import (
 	"github.com/sajal-jayanto/go-template/src/handler"
 )
 
-func SetupSampleRoutes(version *fiber.App){
+type sampleRouter struct{}
+var SampleRouter sampleRouter
+
+func (sampleRouter) SetupRoutes(version *fiber.App){
   route := version.Group("/sample")
 
   route.Post("/", handler.SampleHandler.CreateSample)
